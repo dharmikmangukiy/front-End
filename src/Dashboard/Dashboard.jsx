@@ -25,6 +25,8 @@ import InputLabel from "@mui/material/InputLabel";
 import SearchIcon from "@mui/icons-material/Search";
 import Slide from "@mui/material/Slide";
 import Topbar from "../Topbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -105,6 +107,13 @@ function Dashboard() {
   const [open, setOpen] = useState(false);
   const [maxWidth, setMaxWidth] = React.useState("md");
   const [delte, setdelte] = React.useState(false);
+  const [AddMovies, setAddMovies] = useState({
+    m_name: "",
+    m_photo_link: "",
+    m_time: "",
+    m_rating: "",
+    m_description: "",
+  });
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -121,6 +130,38 @@ function Dashboard() {
   const DeletePopUpopen = () => {
     setdelte(true);
   };
+  const DeleteData=()=>{
+    toast.success("Deleted Successfully")
+    DeletePopUp()
+  }
+
+  const New_Movie_ADD = (e) => {
+    e.preventDefault();
+    if (
+      AddMovies.m_name !== "" &&
+      AddMovies.m_photo_link !== "" &&
+      AddMovies.m_rating !== "" &&
+      AddMovies.m_description !== "" &&
+      AddMovies.m_time !== ""
+    ) {
+      toast.success("Movie Add successfully");
+      handleClose();
+    } else {
+      toast.warn("Please first enter all detail");
+    }
+  };
+
+  const input = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setAddMovies((prevalue) => {
+      return {
+        ...prevalue,
+        [name]: value,
+      };
+    });
+  };
+  console.log(AddMovies);
   const PopUpContent = () => {
     if (Action == "Add") {
       return (
@@ -131,12 +172,18 @@ function Dashboard() {
               id="standard-basic"
               label="Movie Name"
               variant="standard"
+              value={AddMovies.m_name}
+              onChange={input}
+              name="m_name"
             />
             <TextField
               sx={{ mx: "2%", width: "300px" }}
               id="standard-basic"
               label="Movie Photo Link"
               variant="standard"
+              value={AddMovies.m_photo_link}
+              onChange={input}
+              name="m_photo_link"
             />
           </div>
           <div className="d-flex my-1">
@@ -145,12 +192,18 @@ function Dashboard() {
               id="standard-basic"
               label="Movie Time"
               variant="standard"
+              value={AddMovies.m_time}
+              onChange={input}
+              name="m_time"
             />
             <TextField
               sx={{ mx: "2%", width: "300px" }}
               id="standard-basic"
               label="Movie Rating"
               variant="standard"
+              value={AddMovies.m_rating}
+              onChange={input}
+              name="m_rating"
             />
           </div>
           <div className="mt-3">
@@ -161,6 +214,9 @@ function Dashboard() {
               multiline
               rows={4}
               variant="standard"
+              value={AddMovies.m_description}
+              onChange={input}
+              name="m_description"
             />
           </div>
         </>
@@ -222,7 +278,11 @@ function Dashboard() {
     if (Action == "Add") {
       return (
         <>
-          <Button variant="outlined" color="success">
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={(e) => New_Movie_ADD(e)}
+          >
             Save
           </Button>
         </>
@@ -235,17 +295,6 @@ function Dashboard() {
           </Button>
           <Button variant="outlined" color="error" onClick={handleClose}>
             Cancel
-          </Button>
-        </>
-      );
-    } else if (Action == "Delete") {
-      return (
-        <>
-          <Button variant="outlined" color="success">
-            Cancel
-          </Button>
-          <Button variant="outlined" color="error" onClick={handleClose}>
-            Delete
           </Button>
         </>
       );
@@ -329,6 +378,7 @@ function Dashboard() {
   return (
     <div>
       <Topbar />
+      <ToastContainer />
       <div className="app-content--inner container">
         <div className="app-content--inner__wrapper mh-100-vh">
           <div style={{ opacity: 1 }}></div>
@@ -434,7 +484,7 @@ function Dashboard() {
           <Button variant="outlined" onClick={DeletePopUp}>
             Cancel
           </Button>
-          <Button variant="outlined" color="error">
+          <Button variant="outlined" color="error" onClick={DeleteData}>
             Delete
           </Button>
         </DialogContent>

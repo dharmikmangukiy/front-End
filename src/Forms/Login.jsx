@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   function handleClick() {
-    setTimeout(function() {
+    setTimeout(function () {
       window.location.reload();
     }, 2000);
   }
@@ -37,12 +37,18 @@ const Login = () => {
     e.preventDefault();
     setInfoErrors(data);
     if (data.email == "dharmik@gmail.com" && data.password == "P@$$W0RD") {
-      toast("Login successful");
+      toast.success("Login successful");
       localStorage.setItem("login", false);
       handleClick();
       Navigate("/dashboard");
-    } else if (res.data.status == "error") {
-      toast(res.data.message);
+    } else {
+      if (data.email == "" && data.password == "") {
+        toast.warn("Please first enter detail");
+      } else if (data.email != "dharmik@gmail.com") {
+        toast.error("Enter Valid Email");
+      } else if (data.password != "P@$$W0RD") {
+        toast.error("Enter Valid Password");
+      }
     }
   };
 
