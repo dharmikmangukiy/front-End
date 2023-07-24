@@ -36,7 +36,7 @@ const Login = () => {
   const sign_in = (e) => {
     e.preventDefault();
     setInfoErrors(data);
-    if (data.email == "dharmik@gmail.com" && data.password == "P@$$W0RD") {
+    if (data.email == "dharmik@gmail.com" && data.password == "Admin@123") {
       toast.success("Login successful");
       localStorage.setItem("login", false);
       handleClick();
@@ -46,7 +46,7 @@ const Login = () => {
         toast.warn("Please first enter detail");
       } else if (data.email != "dharmik@gmail.com") {
         toast.error("Enter Valid Email");
-      } else if (data.password != "P@$$W0RD") {
+      } else if (data.password != "Admin@123") {
         toast.error("Enter Valid Password");
       }
     }

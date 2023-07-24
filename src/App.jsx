@@ -7,7 +7,7 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import Dashboard from "./Dashboard/Dashboard";
-import Topbar from "./Topbar";
+import Explore from "./ClientSite/Global/explore/Explore";
 import Login from "./Forms/Login";
 import AppClient from "./AppClient";
 import Header from "./ClientSite/Global/Header";
@@ -39,6 +39,7 @@ function App() {
             <Route path="/AppClient" element={<AppClient />} />
             <Route path="/Header" element={<Header />} />
             <Route path="/Footer" element={<Footer />} />
+            <Route path="/Explore/:id" element={<Explore />} />
           </Routes>
         </div>
       </>
