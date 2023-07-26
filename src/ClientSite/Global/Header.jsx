@@ -11,7 +11,6 @@ const Header = () => {
     const [show, setShow] = useState("top");
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
-    const [query, setQuery] = useState("");
     const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,14 +39,7 @@ const Header = () => {
         };
     }, [lastScrollY]);
 
-    const searchQueryHandler = (event) => {
-        if (event.key === "Enter" && query.length > 0) {
-            navigate(`/search/${query}`);
-            setTimeout(() => {
-                setShowSearch(false);
-            }, 1000);
-        }
-    };
+
 
     const openSearch = () => {
         setMobileMenu(false);
@@ -108,8 +100,6 @@ const Header = () => {
                             <input
                                 type="text"
                                 placeholder="Search for a movie or tv show...."
-                                onChange={(e) => setQuery(e.target.value)}
-                                onKeyUp={searchQueryHandler}
                             />
                             <VscChromeClose
                                 onClick={() => setShowSearch(false)}

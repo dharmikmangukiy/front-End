@@ -161,7 +161,7 @@ function Dashboard() {
       };
     });
   };
-  console.log(AddMovies);
+  // console.log(AddMovies);
   const PopUpContent = () => {
     if (Action == "Add") {
       return (

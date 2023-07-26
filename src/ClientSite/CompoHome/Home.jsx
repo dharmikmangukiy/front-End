@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useFetch from "../../Componants/hooks/useFetch";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Img from "../../Componants/lazyLoadImage/Img";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Trending from "./Trending";
 import Popular from "./Popular";
 import TopRated from "./TopRated";
+import axios from "axios";
 
 const Home = () => {
   const [background, setBackground] = useState("");
@@ -15,7 +17,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch("/movie/upcoming");
-  // const url = "https://image.tmdb.org/t/p/original";
+
   useEffect(() => {
     const bg =
       url.backdrop +
@@ -24,14 +26,24 @@ const Home = () => {
     console.log(bg);
   }, [data]);
 
-  const searchQueryHandler = (event) => {
-    if (event.key === "Enter" && query.length > 0) {
-      navigate(`/search/${query}`);
+  const searchQueryHandler = () => {
+    if (query.length != 0) {
+      axios.post(`http://localhost:3001/search/${query}`).then((res) => {
+        if (res.data.message == "Movie not found.") {
+          toast.error(res.data.message);
+        } else {
+          navigate(`/movie/${res.data.id}`);
+        }
+      });
+    } else {
+      toast.warn("Enter Movie Name");
     }
   };
-  console.log(url);
+
   return (
     <>
+      <ToastContainer />
+
       <div className="heroBanner">
         {!loading && (
           <div className="backdrop-img">
@@ -51,16 +63,15 @@ const Home = () => {
                 type="text"
                 placeholder="Search for a movie or tv show...."
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
               />
-              <button>Search</button>
+              <button onClick={searchQueryHandler}>Search</button>
             </div>
           </div>
         </ContentWrapper>
       </div>
-      <Trending/>
-      <Popular/>
-      <TopRated/>
+      <Trending />
+      <Popular />
+      <TopRated />
     </>
   );
 };

@@ -8,10 +8,8 @@ import { fetchDataFromApi } from "../../../Componants/utils/api";
 import ContentWrapper from "../../contentWrapper/ContentWrapper";
 import MovieCard from "../movieCard/MovieCard";
 import Spinner from "../spinner/Spinner";
-import Header from "../Header"
-import Footer from "../Footer"
-
-
+import Header from "../Header";
+import Footer from "../Footer";
 
 let filters = {};
 
@@ -35,7 +33,7 @@ const Explore = () => {
   const [genre, setGenre] = useState(null);
   const [sortby, setSortby] = useState(null);
   const { mediaType } = useParams();
-
+// console.log(mediaType);
   const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
   const fetchInitialData = () => {
@@ -100,7 +98,7 @@ const Explore = () => {
   return (
     <>
       <Header />
-      <div className="explorePage ">
+      <div className="explorePage">
         <ContentWrapper>
           <div className="pageHeader">
             <div className="pageTitle">
@@ -163,7 +161,7 @@ const Explore = () => {
           )}
         </ContentWrapper>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
