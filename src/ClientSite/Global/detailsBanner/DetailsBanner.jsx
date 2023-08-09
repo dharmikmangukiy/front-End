@@ -241,7 +241,7 @@ const DetailsBanner = ({ video, crew }) => {
         open={open}
       >
         <DialogContent>
-          <video width="1000" height="600" controls autoPlay loop>
+          <video width="1000" height="550" controls autoPlay loop>
             <source src={Video_onff} type="video/mp4" quality="high" />
             Your browser does not support the video tag.
           </video>

@@ -5,12 +5,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import KeyIcon from "@mui/icons-material/Key";
-import { NavLink, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [infoErrors, setInfoErrors] = useState({});
   const [data, setdata] = useState({
     email: "",
     password: "",
@@ -33,9 +32,13 @@ const Login = () => {
     }, 2000);
   }
 
+  const handleLoginSuccess = (role) => {
+    localStorage.setItem("Author", role);
+    handleClick()
+  };
+
   const sign_in = (e) => {
     e.preventDefault();
-    setInfoErrors(data);
     axios
       .post("http://localhost:5000/login", {
         email: data.email,
@@ -43,11 +46,10 @@ const Login = () => {
       })
       .then((res) => {
         console.log(res);
-        if (data.email == res.data.email && data.password ) {
+        if (data.email == res.data.email && data.password) {
           toast.success("Login successful");
           localStorage.setItem("login", false);
-          handleClick();
-          Navigate("/dashboard");
+          handleLoginSuccess(res.data.role);
         } else if (res.data.message === "Username or password is wrong!") {
           toast.error(res.data.message);
         } else {

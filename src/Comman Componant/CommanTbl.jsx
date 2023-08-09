@@ -12,7 +12,7 @@ function CommanTbl(prop) {
   useEffect(() => {
     axios.get(`http://localhost:5000/${prop.url}`).then((res) => {
       if (res.data.message == "error") {
-        Navigate("/dashboard");
+        Navigate("/Dashboard");
       } else {
         setDashData(res.data);
       }

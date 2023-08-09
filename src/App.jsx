@@ -13,9 +13,11 @@ import AppClient from "./AppClient";
 
 import { fetchDataFromApi } from "../src/Componants/utils/api";
 import { useSelector, useDispatch } from "react-redux";
-import { getApiConfiguration, getGenres } from "../src/ClientSite/Global/store/homeSlice";
+import {
+  getApiConfiguration,
+  getGenres,
+} from "../src/ClientSite/Global/store/homeSlice";
 import Details from "./ClientSite/Global/Details";
-
 
 function useScrollToTop() {
   const { pathname } = useLocation();
@@ -25,40 +27,41 @@ function useScrollToTop() {
 }
 function App() {
   const [login, setLogin] = useState(localStorage.getItem("login"));
+  const [Author, setAuthor] = useState(localStorage.getItem("Author"));
   useScrollToTop();
 
   const dispatch = useDispatch();
   useEffect(() => {
-      fetchApiConfig();
-      genresCall();
+    fetchApiConfig();
+    genresCall();
   }, []);
 
   const fetchApiConfig = () => {
-      fetchDataFromApi("/configuration").then((res) => {
-          const url = {
-              backdrop: res[0].images.secure_base_url + "original",
-              poster: res[0].images.secure_base_url + "original",
-              profile: res[0].images.secure_base_url + "original",
-          };
+    fetchDataFromApi("/configuration").then((res) => {
+      const url = {
+        backdrop: res[0].images.secure_base_url + "original",
+        poster: res[0].images.secure_base_url + "original",
+        profile: res[0].images.secure_base_url + "original",
+      };
 
-          dispatch(getApiConfiguration(url));
-      });
+      dispatch(getApiConfiguration(url));
+    });
   };
 
   const genresCall = async () => {
-      let promises = [];
-      let endPoints = ["tv", "movie"];
-      let allGenres = {};
+    let promises = [];
+    let endPoints = ["tv", "movie"];
+    let allGenres = {};
 
-      endPoints.forEach((url) => {
-          promises.push(fetchDataFromApi(`/genre/${url}/list`));
-      });
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`));
+    });
 
-      const data = await Promise.all(promises);
-      dispatch(getGenres(data[1]));
+    const data = await Promise.all(promises);
+    dispatch(getGenres(data[1]));
   };
 
-
+  console.log(Author);
   if (login == "true") {
     return (
       <Routes>
@@ -66,19 +69,26 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );
+  } else if (Author == "admin") {
+    return (
+      <div className="app">
+        <Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </div>
+    );
   } else {
     return (
-      <>
-        <div className="app">
-          <Routes>
-            <Route path="*" element={<Navigate to="/" replace />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/AppClient" element={<AppClient />} />
-            <Route path="/Explore/:mediaType" element={<Explore />} />
-            <Route path="/:mediaType/:id" element={<Details />} />
-          </Routes>
-        </div>
-      </>
+      <div className="app">
+        <Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<AppClient />} />
+          <Route path="/AppClient" element={<AppClient />} />
+          <Route path="/Explore/:mediaType" element={<Explore />} />
+          <Route path="/:mediaType/:id" element={<Details />} />
+        </Routes>
+      </div>
     );
   }
 }
