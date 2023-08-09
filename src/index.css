@@ -243,14 +243,14 @@ a {
   top: 92%;
   right: 30px;
 }
-.nodatafound{
+.nodatafound {
   color: white;
   text-align: center;
   margin-top: 12%;
 }
 .player-wrapper {
   position: relative;
-  padding-top: 56.25%; 
+  padding-top: 56.25%;
 }
 
 .react-player {
@@ -258,6 +258,12 @@ a {
   top: 0;
   left: 0;
 }
-.BAck_player .css-ypiqx9-MuiDialogContent-root{
+.BAck_player .css-ypiqx9-MuiDialogContent-root {
   background-color: #04152d !important;
+}
+.play_goggle {
+  opacity: 0.4;
+}
+.play_goggle:hover {
+  opacity: 1;
 }

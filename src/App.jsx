@@ -18,6 +18,7 @@ import {
   getGenres,
 } from "../src/ClientSite/Global/store/homeSlice";
 import Details from "./ClientSite/Global/Details";
+import Trending_Today from "./ClientSite/Global/Trending today/Trending_Today";
 
 function useScrollToTop() {
   const { pathname } = useLocation();
@@ -75,6 +76,9 @@ function App() {
         <Routes>
         <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Dashboard />} />
+          <Route path="/AppClient" element={<AppClient />} />
+          <Route path="/Explore/:mediaType" element={<Explore />} />
+          <Route path="/:mediaType/:id" element={<Details />} />
         </Routes>
       </div>
     );
@@ -85,6 +89,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<AppClient />} />
           <Route path="/AppClient" element={<AppClient />} />
+          <Route path="/Trending_Today" element={<Trending_Today />} />
           <Route path="/Explore/:mediaType" element={<Explore />} />
           <Route path="/:mediaType/:id" element={<Details />} />
         </Routes>
