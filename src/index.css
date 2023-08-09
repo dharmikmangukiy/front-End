@@ -267,3 +267,8 @@ a {
 .play_goggle:hover {
   opacity: 1;
 }
+@media only screen and (max-width: 764px) {
+  .for_hide {
+    display: none !important;
+  }
+}
