@@ -33,7 +33,6 @@ const Explore = () => {
   const [genre, setGenre] = useState(null);
   const [sortby, setSortby] = useState(null);
   const { mediaType } = useParams();
-// console.log(mediaType);
   const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
   const fetchInitialData = () => {
@@ -44,23 +43,6 @@ const Explore = () => {
       setLoading(false);
     });
   };
-
-  const fetchNextPageData = () => {
-    fetchDataFromApi(`/discover/${mediaType}?page=${pageNum}`, filters).then(
-      (res) => {
-        if (data?.results) {
-          setData({
-            ...data,
-            results: [...data?.results, ...res.results],
-          });
-        } else {
-          setData(res);
-        }
-        setPageNum((prev) => prev + 1);
-      }
-    );
-  };
-
   useEffect(() => {
     filters = {};
     setData(null);
@@ -110,7 +92,7 @@ const Explore = () => {
                 name="genres"
                 value={genre}
                 closeMenuOnSelect={false}
-                options={genresData?.genres}
+                options={genresData}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
                 onChange={onChange}
@@ -133,15 +115,14 @@ const Explore = () => {
           {loading && <Spinner initial={true} />}
           {!loading && (
             <>
-              {data?.results?.length > 0 ? (
+              {data?.length > 0 ? (
                 <InfiniteScroll
                   className="content"
-                  dataLength={data?.results?.length || []}
-                  next={fetchNextPageData}
+                  dataLength={data?.length || []}
                   hasMore={pageNum <= data?.total_pages}
                   loader={<Spinner />}
                 >
-                  {data?.results?.map((item, index) => {
+                  {data?.map((item, index) => {
                     if (item.media_type === "person") return;
                     return (
                       <MovieCard

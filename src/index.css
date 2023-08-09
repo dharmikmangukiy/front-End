@@ -11,7 +11,7 @@
     ),
     url("https://assets.nflxext.com/ffe/siteui/vlv3/ce221d7a-8901-41d9-b726-3ea2efe3a650/2f69dcef-463f-44da-b3b9-662b65f33f82/IN-en-20230703-popsignuptwoweeks-perspective_alpha_website_large.jpg");
 }
-body{
+body {
   background: ghostwhite;
 }
 *,
@@ -205,17 +205,59 @@ a {
   display: flex;
   justify-content: center;
 }
-.navigation_button .css-lntp72-MuiButtonBase-root-MuiFab-root{
+.navigation_button .css-lntp72-MuiButtonBase-root-MuiFab-root {
   background-color: #fee0e3 !important;
-
 }
 .del_popup .css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
   padding: 25px 137px !important;
 }
-.del_popup .MuiDialogTitle-root+.css-ypiqx9-MuiDialogContent-root{
+.del_popup .MuiDialogTitle-root + .css-ypiqx9-MuiDialogContent-root {
   display: flex !important;
   justify-content: space-around !important;
 }
-.client_conteint{
+.client_conteint {
   background-color: #04152d;
+}
+.react-select-Welcome {
+  color: black !important;
+}
+.react-select-Welcome .css-13cymwt-control {
+  border: 0 !important;
+  padding: 8px !important;
+  /* width: 630px; */
+  background-color: transparent;
+}
+.react-select-Welcome .css-t3ipsp-control {
+  border-color: white !important;
+  border: 0 !important;
+  box-shadow: 0px 0px !important;
+  padding: 8px !important;
+  width: 630px;
+  background-color: transparent;
+}
+.react-select-Welcome .css-1u9des2-indicatorSeparator {
+  width: 0 !important;
+}
+.sticky-button {
+  position: fixed;
+  top: 92%;
+  right: 30px;
+}
+.nodatafound{
+  color: white;
+  text-align: center;
+  margin-top: 12%;
+}
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; 
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.BAck_player .css-ypiqx9-MuiDialogContent-root{
+  background-color: #04152d !important;
 }

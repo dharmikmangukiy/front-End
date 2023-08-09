@@ -28,9 +28,6 @@ function App() {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const { url } = useSelector((state) => state.home);
-  // console.log(url);
-
   useEffect(() => {
       fetchApiConfig();
       genresCall();
@@ -38,12 +35,10 @@ function App() {
 
   const fetchApiConfig = () => {
       fetchDataFromApi("/configuration").then((res) => {
-          // console.log(res);
-
           const url = {
-              backdrop: res.images.secure_base_url + "original",
-              poster: res.images.secure_base_url + "original",
-              profile: res.images.secure_base_url + "original",
+              backdrop: res[0].images.secure_base_url + "original",
+              poster: res[0].images.secure_base_url + "original",
+              profile: res[0].images.secure_base_url + "original",
           };
 
           dispatch(getApiConfiguration(url));
@@ -60,12 +55,7 @@ function App() {
       });
 
       const data = await Promise.all(promises);
-      // console.log(data);
-      data.map(({ genres }) => {
-          return genres.map((item) => (allGenres[item.id] = item));
-      });
-
-      dispatch(getGenres(allGenres));
+      dispatch(getGenres(data[1]));
   };
 
 

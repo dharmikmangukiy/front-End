@@ -36,20 +36,27 @@ const Login = () => {
   const sign_in = (e) => {
     e.preventDefault();
     setInfoErrors(data);
-    if (data.email == "dharmik@gmail.com" && data.password == "Admin@123") {
-      toast.success("Login successful");
-      localStorage.setItem("login", false);
-      handleClick();
-      Navigate("/dashboard");
-    } else {
-      if (data.email == "" && data.password == "") {
-        toast.warn("Please first enter detail");
-      } else if (data.email != "dharmik@gmail.com") {
-        toast.error("Enter Valid Email");
-      } else if (data.password != "Admin@123") {
-        toast.error("Enter Valid Password");
-      }
-    }
+    axios
+      .post("http://localhost:5000/login", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((res) => {
+        console.log(res);
+        if (data.email == res.data.email && data.password ) {
+          toast.success("Login successful");
+          localStorage.setItem("login", false);
+          handleClick();
+          Navigate("/dashboard");
+        } else if (res.data.message === "Username or password is wrong!") {
+          toast.error(res.data.message);
+        } else {
+          toast.error("Please enter both email and password.");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
   };
 
   return (

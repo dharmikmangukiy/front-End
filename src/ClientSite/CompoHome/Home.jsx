@@ -9,41 +9,27 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Trending from "./Trending";
 import Popular from "./Popular";
 import TopRated from "./TopRated";
-import axios from "axios";
+import Select from "react-select";
 
 const Home = () => {
   const [background, setBackground] = useState("");
-  const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
-  const { data, loading } = useFetch("/movie/upcoming");
-
+  const { data, loading } = useFetch("/discover/movie");
   useEffect(() => {
     const bg =
       url.backdrop +
-      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
+      data?.[Math.floor(Math.random() * 40)]?.backdrop_path;
     setBackground(bg);
-    console.log(bg);
   }, [data]);
-
-  const searchQueryHandler = () => {
-    if (query.length != 0) {
-      axios.post(`http://localhost:3001/search/${query}`).then((res) => {
-        if (res.data.message == "Movie not found.") {
-          toast.error(res.data.message);
-        } else {
-          navigate(`/movie/${res.data.id}`);
-        }
-      });
-    } else {
-      toast.warn("Enter Movie Name");
+  const onChange = (selectedItems, action) => {
+    if (action.name === "Search") {
+      navigate(`/movie/${selectedItems.id}`);
     }
   };
-
   return (
     <>
       <ToastContainer />
-
       <div className="heroBanner">
         {!loading && (
           <div className="backdrop-img">
@@ -59,12 +45,19 @@ const Home = () => {
               Millions of movies, TV shows and people to discover. Explore now.
             </span>
             <div className="searchInput">
-              <input
-                type="text"
+              <Select
+                name="Search"
+                options={data}
+                getOptionLabel={(option) => option.original_title}
+                getOptionValue={(option) => option.id}
+                onChange={onChange}
                 placeholder="Search for a movie or tv show...."
-                onChange={(e) => setQuery(e.target.value)}
+                className="react-select-Welcome input"
+                classNamePrefix="react-select"
               />
-              <button onClick={searchQueryHandler}>Search</button>
+              <button onClick={() => toast.warn("Enter Movie Name")}>
+                Search
+              </button>
             </div>
           </div>
         </ContentWrapper>

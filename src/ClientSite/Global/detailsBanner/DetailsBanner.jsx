@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-
+import Video_onff from "../../../../public/Video/Netflix New Logo Animation 2019.mp4";
 import ContentWrapper from "../../contentWrapper/ContentWrapper";
 import useFetch from "../../../Componants/hooks/useFetch";
 import Genres from "../Genres";
@@ -12,8 +12,59 @@ import PosterFallback from "../../../../public/Images/no-poster.png";
 import { PlayIcon } from "./Playbtn";
 import Cast from "../cast/Cast";
 
+import PropTypes from "prop-types";
+import { Player } from "video-react";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
 const DetailsBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
+  const [open, setOpen] = useState(false);
+  const [maxWidth, setMaxWidth] = React.useState("lg");
+
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.home);
   const [Kast, setCast] = useState({
@@ -55,15 +106,21 @@ const DetailsBanner = ({ video, crew }) => {
   const CastSection = () => {
     if (mediaType == "movie") {
       return <Cast data={Kast?.cast} />;
-    }else{
+    } else {
       console.log("TV Show section");
     }
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
   return (
     <div className="detailsBanner" style={{ paddingBottom: "1px" }}>
       {!loading ? (
         <>
-          {!!data && (
+          {!!data ? (
             <React.Fragment>
               <div className="backdrop-img">
                 <Img src={url.backdrop + data.backdrop_path} />
@@ -83,7 +140,7 @@ const DetailsBanner = ({ video, crew }) => {
                   </div>
                   <div className="right">
                     <div className="title">
-                      {`${data.name || data.title} (${dayjs(
+                      {`${data.original_name || data.original_title} (${dayjs(
                         data?.release_date
                       ).format("YYYY")})`}
                     </div>
@@ -91,7 +148,7 @@ const DetailsBanner = ({ video, crew }) => {
 
                     <Genres data={_genres} />
 
-                    <div className="roww">
+                    <div className="roww" onClick={handleClickOpen}>
                       <CircleRating rating={data.vote_average.toFixed(1)} />
                       <div
                         className="playbtn"
@@ -156,6 +213,8 @@ const DetailsBanner = ({ video, crew }) => {
                 {CastSection()}
               </ContentWrapper>
             </React.Fragment>
+          ) : (
+            <h2 className="nodatafound">Sorry, Results not found!</h2>
           )}
         </>
       ) : (
@@ -174,6 +233,20 @@ const DetailsBanner = ({ video, crew }) => {
           </ContentWrapper>
         </div>
       )}
+      <BootstrapDialog
+        className="BAck_player"
+        maxWidth={maxWidth}
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent>
+          <video width="1000" height="600" controls autoPlay loop>
+            <source src={Video_onff} type="video/mp4" quality="high" />
+            Your browser does not support the video tag.
+          </video>
+        </DialogContent>
+      </BootstrapDialog>
     </div>
   );
 };
