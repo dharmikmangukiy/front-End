@@ -13,7 +13,6 @@ import { PlayIcon } from "./Playbtn";
 import Cast from "../cast/Cast";
 
 import PropTypes from "prop-types";
-import { Player } from "video-react";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";

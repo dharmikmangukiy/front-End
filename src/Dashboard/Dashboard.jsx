@@ -112,6 +112,8 @@ function Dashboard() {
   const [open, setOpen] = useState(false);
   const [maxWidth, setMaxWidth] = React.useState("md");
   const [delte, setdelte] = React.useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [AddMovies, setAddMovies] = useState({
     original_title: "",
     id: "",
@@ -961,8 +963,6 @@ function Dashboard() {
             <Button
               size="small"
               className="btn-edit"
-              // onClick={(event) => editGroup(row)}
-              // {...row}
               onClick={() => {
                 setAction("Edit");
                 Get_TV(row.id);
@@ -974,8 +974,6 @@ function Dashboard() {
             <Button
               size="small"
               className="btn-closee"
-              // onClick={(event) => editGroup(row)}
-              // {...row}
               onClick={() => {
                 setAction("Delete");
                 Get_TV(row.id);
@@ -1013,7 +1011,11 @@ function Dashboard() {
                   <InputLabel htmlFor="standard-adornment-amount">
                     Search
                   </InputLabel>
-                  <Input id="standard-adornment-amount" />
+                  <Input
+                    id="standard-adornment-amount"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                 </FormControl>
                 <Button
                   variant="outlined"
@@ -1066,12 +1068,15 @@ function Dashboard() {
                         setAction("Add");
                       }}
                       open={open}
+                      name="original_title"
                       delte={delte}
+                      searchQuery={searchQuery}
                     />
                   </CustomTabPanel>
                   <CustomTabPanel value={value} index={1}>
                     <CommanTbl
                       url={"discover/tv"}
+                      name="original_name"
                       column={columns_TV}
                       headName={headName}
                       handleClickOpen={() => {
@@ -1079,6 +1084,7 @@ function Dashboard() {
                         setAction("Add");
                       }}
                       open={open}
+                      searchQuery={searchQuery}
                       delte={delte}
                     />
                   </CustomTabPanel>

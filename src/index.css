@@ -271,4 +271,82 @@ a {
   .for_hide {
     display: none !important;
   }
+  .border_max{
+    width: 48% !important;
+    margin-bottom: 10px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .border_max{
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+}
+.border_max {
+  border: 1px solid grey;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  width: 24%;
+  
+}
+.box_premium {
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(
+      318.25deg,
+      rgb(229, 9, 20) 0%,
+      rgba(74, 42, 150, 0.5) 92.16%,
+      rgba(74, 42, 150, 0) 109.15%
+    ),
+    rgb(29, 82, 157);
+}
+.second_box {
+  background: linear-gradient(
+      318.25deg,
+      rgb(176, 56, 220) 0%,
+      rgba(74, 42, 150, 0.5) 92.16%,
+      rgba(74, 42, 150, 0) 109.15%
+    ),
+    rgb(29, 82, 157);
+  border-radius: 10px 10px 0 0;
+}
+.third_box {
+  border-radius: 10px 10px 0 0;
+
+  background: linear-gradient(
+      318.25deg,
+      rgb(109, 59, 227) 0%,
+      rgba(74, 42, 150, 0.5) 92.16%,
+      rgba(74, 42, 150, 0) 109.15%
+    ),
+    rgb(29, 82, 157);
+}
+.forth_box {
+  background: linear-gradient(
+      318.25deg,
+      rgb(33, 114, 227) 0%,
+      rgba(74, 42, 150, 0.5) 92.16%,
+      rgba(74, 42, 150, 0) 109.15%
+    ),
+    rgb(29, 82, 157);
+  border-radius: 10px 10px 0 0;
+}
+.premiun_quality {
+  font-size: 25px;
+  font-weight: 500;
+}
+.responsive_box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.Next_button{
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: rgb(229, 9, 20);
+  color: white;
+  border: none;
+  font-weight: 700;
+  padding: 15px 100px;
+  cursor: pointer;
 }

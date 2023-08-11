@@ -4,8 +4,62 @@ import Img from "../../../Componants/lazyLoadImage/Img";
 import Header from "../Header";
 import Footer from "../Footer";
 import Trending from "../../CompoHome/Trending";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import Video_onff from "../../../../public/Video/Netflix New Logo Animation 2019.mp4";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
 
 const Trending_Today = () => {
+  const [open, setOpen] = useState(false);
+  const [maxWidth, setMaxWidth] = React.useState("lg");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <>
       <Header />
@@ -59,7 +113,7 @@ const Trending_Today = () => {
             </h5>
             <div className="play_goggle">
               <div className="roww">
-                <div className="playbtn">
+                <div className="playbtn" onClick={handleClickOpen}>
                   <svg
                     height="100px"
                     width="100px"
@@ -104,6 +158,20 @@ const Trending_Today = () => {
         <Trending />
       </div>
       <Footer />
+      <BootstrapDialog
+        className="BAck_player"
+        maxWidth={maxWidth}
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent>
+          <video width="1000" height="550" controls autoPlay loop>
+            <source src={Video_onff} type="video/mp4" quality="high" />
+            Your browser does not support the video tag.
+          </video>
+        </DialogContent>
+      </BootstrapDialog>
     </>
   );
 };

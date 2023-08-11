@@ -19,6 +19,9 @@ import {
 } from "../src/ClientSite/Global/store/homeSlice";
 import Details from "./ClientSite/Global/Details";
 import Trending_Today from "./ClientSite/Global/Trending today/Trending_Today";
+import PlanForm from "./Forms/PlaneForm";
+import Step1 from "./Forms/Step1";
+import Step3 from "./Forms/Step3";
 
 function useScrollToTop() {
   const { pathname } = useLocation();
@@ -79,6 +82,10 @@ function App() {
           <Route path="/AppClient" element={<AppClient />} />
           <Route path="/Explore/:mediaType" element={<Explore />} />
           <Route path="/:mediaType/:id" element={<Details />} />
+          <Route path="/Trending_Today" element={<Trending_Today />} />
+          <Route path="/PlanForm" element={<PlanForm />} />
+          <Route path="/step1" element={<Step1 />} />
+          <Route path="/step3" element={<Step3 />} />
         </Routes>
       </div>
     );
@@ -90,6 +97,9 @@ function App() {
           <Route path="/" element={<AppClient />} />
           <Route path="/AppClient" element={<AppClient />} />
           <Route path="/Trending_Today" element={<Trending_Today />} />
+          <Route path="/PlanForm" element={<PlanForm />} />
+          <Route path="/step1" element={<Step1 />} />
+          <Route path="/step3" element={<Step3 />} />
           <Route path="/Explore/:mediaType" element={<Explore />} />
           <Route path="/:mediaType/:id" element={<Details />} />
         </Routes>

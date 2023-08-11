@@ -8,16 +8,28 @@ import useFetch from "../Componants/hooks/useFetch";
 
 function CommanTbl(prop) {
   const { loading } = useFetch();
-  const [DashData, setDashData] = useState("");
+  const [DashData, setDashData] = useState([]);
+  const [newData, setNewData] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/${prop.url}`).then((res) => {
       if (res.data.message == "error") {
         Navigate("/Dashboard");
       } else {
         setDashData(res.data);
+        setNewData(res.data);
+        console.log(res.data);
       }
     });
   }, [prop.open, prop.delte]);
+  useEffect(() => {
+    console.log("fsdafsad", DashData);
+    const matchingObjects = DashData.filter((obj) =>
+      obj[prop.name]?.toLowerCase().includes(prop.searchQuery.toLowerCase())
+    );
+    console.log("nArray", matchingObjects);
+    setNewData(matchingObjects);
+  }, [prop.searchQuery]);
+
   return (
     <div>
       {!loading ? (
@@ -34,7 +46,7 @@ function CommanTbl(prop) {
           <DataTable
             className="ok_header"
             columns={prop.column}
-            data={DashData}
+            data={newData}
             highlightOnHover
             persistTableHead
             pointerOnHover
