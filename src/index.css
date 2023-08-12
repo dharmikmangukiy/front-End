@@ -11,6 +11,19 @@
     ),
     url("https://assets.nflxext.com/ffe/siteui/vlv3/ce221d7a-8901-41d9-b726-3ea2efe3a650/2f69dcef-463f-44da-b3b9-662b65f33f82/IN-en-20230703-popsignuptwoweeks-perspective_alpha_website_large.jpg");
 }
+.body_reg {
+  display: flex;
+  width: auto;
+  color: #6a6f8c;
+  height: 102vh;
+  background-size: cover;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(53, 53, 53, 0.52),
+      rgba(117, 19, 93, 0.73)
+    ),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/6c884f48-f7d8-4a59-9d25-b7c138813aee/ed2b002b-c6c5-459c-9c97-753f50e8286b/IN-en-20230807-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+}
 body {
   background: ghostwhite;
 }
@@ -349,4 +362,7 @@ a {
   font-weight: 700;
   padding: 15px 100px;
   cursor: pointer;
+}
+.profilecontent .css-luj5ib-JoyCardOverflow-root{
+  background-color:rgb(173, 15, 23)  !important;
 }

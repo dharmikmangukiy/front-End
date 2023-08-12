@@ -62,6 +62,11 @@ const Trending_Today = () => {
     },
     {
       NameLOGO:
+        "https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABVYBNVsnjk6uT2qV5RSi-BfoFDfWqfUIGQo9B4dGy9aVQ4U5diQQPoVSebLs29enTCJq2bpzKlT8ZLsXQWtlWFFBr2NuShnS4guxy6EVSRG4.webp?r=aec",
+      Back: "https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABfsZlboG6R7nF2Fb4l-WeWNDDBnxC2d2c4q2EjGg3fu7Jiggb_pwICDDCAeNhhbMDNa1EuNb8YgOXWGYKOjGSojZocJq34_MT-TC.webp?r=227",
+    },
+    {
+      NameLOGO:
         "https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABcvXa1DBhOilwwcUxV92MEpFPzgPf9O7qqHP8D_tzs0q9D7Bqsstz0gt7fVYNkzq2j2afrwnlxPuZg3iTrUcnhqc5kUDO7sbCwWTXLDGOWtzJaxlCrF7l1o7gVwj8-8fPvYTlkiVyMeSqXQ7JkcEpcFPyBhaIuGuGOMMGNq7VPzX-jQ0RnqLJA.webp?r=ce9",
       Back: "	https://occ-0-6246-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABcxpwy-3Ro80hSapeXR417NpC3Ehs7_VlS1OwEwJRb2U4Irmbx_Jahtokzbx6SAX0sI4aKEqaACWONA_JCx_rQE3EUJgVML3HLau.webp?r=01a",
     },
@@ -105,7 +110,7 @@ const Trending_Today = () => {
   };
 
   useEffect(() => {
-    const bg = Storage?.[Math.floor(Math.random() * 8)];
+    const bg = Storage?.[Math.floor(Math.random() * 9)];
     setBackground(bg);
   }, [Storage]);
   return (

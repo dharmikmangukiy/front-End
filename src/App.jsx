@@ -22,6 +22,7 @@ import Trending_Today from "./ClientSite/Global/Trending today/Trending_Today";
 import PlanForm from "./Forms/PlaneForm";
 import Step1 from "./Forms/Step1";
 import Step3 from "./Forms/Step3";
+import Registration from "./Forms/Registration";
 
 function useScrollToTop() {
   const { pathname } = useLocation();
@@ -70,6 +71,7 @@ function App() {
     return (
       <Routes>
         <Route path="/" element={<Login setLogin={setLogin} />} />
+        <Route path="/Registration" element={<Registration />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );
@@ -77,7 +79,7 @@ function App() {
     return (
       <div className="app">
         <Routes>
-        <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/AppClient" element={<AppClient />} />
           <Route path="/Explore/:mediaType" element={<Explore />} />
@@ -93,7 +95,7 @@ function App() {
     return (
       <div className="app">
         <Routes>
-        <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<AppClient />} />
           <Route path="/AppClient" element={<AppClient />} />
           <Route path="/Trending_Today" element={<Trending_Today />} />
