@@ -222,11 +222,11 @@ function Dashboard() {
         .post("http://localhost:5000/products", AddMovies)
         .then((res) => {
           console.log("ADD request successful:", res.data);
+          toast.success("Movie Add successfully");
         })
         .catch((error) => {
           console.error("Error making ADD request:", error);
         });
-      toast.success("Movie Add successfully");
       handleClose();
       setAddMovies(
         AddMovies.original_title == "",
@@ -258,11 +258,12 @@ function Dashboard() {
         .post("http://localhost:5000/tvproducts", TVSeries)
         .then((res) => {
           console.log("ADD request successful:", res.data);
+      toast.success("TV Show Add successfully");
+
         })
         .catch((error) => {
           console.error("Error making ADD request:", error);
         });
-      toast.success("TV Show Add successfully");
       handleClose();
       setTVSeries(
         TVSeries.original_name == "",
@@ -364,11 +365,12 @@ function Dashboard() {
         .put(`http://localhost:5000/product/${StoreID}`, AddMovies)
         .then((res) => {
           console.log("Update request successful:", res.data);
+      toast.success("Movie Update successfully");
+
         })
         .catch((error) => {
           console.error("Error making Update request:", error);
         });
-      toast.success("Movie Update successfully");
       handleClose();
       setAddMovies(
         AddMovies.original_title == "",
@@ -398,11 +400,12 @@ function Dashboard() {
         .put(`http://localhost:5000/tvproduct/${StoreID}`, TVSeries)
         .then((res) => {
           console.log("Update request successful:", res.data);
+      toast.success("TV Show Update successfully");
+
         })
         .catch((error) => {
           console.error("Error making Update request:", error);
         });
-      toast.success("TV Show Update successfully");
       handleClose();
       setTVSeries(
         TVSeries.original_name == "",
