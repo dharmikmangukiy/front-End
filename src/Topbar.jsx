@@ -53,7 +53,7 @@ const Topbar = () => {
               alt="Avatar"
               class="avatar"
             />{" "}
-            <span className="mx-2 username"> Dharmik</span>
+            <span className="mx-2 username"> AKATSUKI </span>
           </IconButton>
         </Box>
       </div>

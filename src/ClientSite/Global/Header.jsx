@@ -330,7 +330,7 @@ const Header = () => {
               level="title-lg"
               sx={{ mt: "calc(var(--icon-size) / 2)" }}
             >
-              🎊 Dharmik Mangukiya🎊
+              🎊 AKATSUKI GROUP 🎊
             </Typography>
             <CardContent
               sx={{
